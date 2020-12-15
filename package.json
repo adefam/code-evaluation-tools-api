@@ -7,7 +7,9 @@
     "dev": "nodemon server",
     "migrate": "npx sequelize-cli db:migrate",
     "undo": "sequelize-cli db:migrate:undo",
-    "undo:all": "npx sequelize-cli db:migrate:undo:all"
+    "undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "seed": "npx sequelize-cli db:seed:all",
+    "undo:seed": "npx sequelize-cli db:seed:undo:all"
   },
   "repository": {
     "type": "git",

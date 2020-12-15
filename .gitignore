@@ -105,3 +105,6 @@ dist
 
 #env file
 config/config.env
+
+#prettier
+.prettierrc.js
