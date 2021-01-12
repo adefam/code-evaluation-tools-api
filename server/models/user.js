@@ -1,71 +1,115 @@
+const bcrypt = require('bcryptjs');
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
+const { Model, Sequelize } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  User.init({
-    uuid: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-      allowNull: false,
-      primaryKey: true
-    },
-    firstName: DataTypes.STRING,
-     allowNull:false,
-      validate: {
-       notEmpty: {
-        args: true,
-        msg: 'Firstname field cannot be empty'
+  const User = sequelize.define(
+    'User',
+    {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
+        primaryKey: true,
       },
-    },
-    lastName: DataTypes.STRING,
-     allowNull:false,
-      validate: {
-       notEmpty: {
-        args: true,
-        msg: 'Lastname field cannot be empty'
-    },
-   },
-   email: DataTypes.STRING,
-   allowNull:false,
-   unique: true,
-    validate: {
-     notEmpty: {
-      args: true,
-      msg: 'Email field cannot be empty'
-    },
-  },
-  password: DataTypes.STRING,
-     allowNull:false,
-      validate: {
-       notEmpty: {
-        args: true,
-        msg: 'Password field cannot be empty'
+
+      userName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'username field cannot be empty',
+          },
+        },
       },
-      len: {
-        args: [10],
-        msg: 'password must contain a maximum of 10 characters'
+
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'First name field cannot be empty',
+          },
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'Lastname field cannot be empty',
+          },
+        },
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'Email field cannot be empty',
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'Password field cannot be empty',
+          },
+          len: {
+            args: [10],
+            msg: 'password must contain a minimum of 10 characters',
+          },
+        }, 
+      },
+
+      mobile: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'must contain mobile',
+          },
+          len: {
+            args: [9, 11],
+            msg: 'mobile must contain a minimun of 9 and maximum of 11 characters',
+          },
+        },
+      },
+    
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      role: {
+        type: DataTypes.ENUM,
+        values: ['user', 'admin', 'superadmin'],
+        defaultValue: 'user',
+      },
+    }, {
+      hooks: {
+        afterValidate: async (user) => {
+          const salt = await bcrypt.genSalt(10);
+          user.password = await bcrypt.hash(user.password, salt);
+        }
       }
     },
-    isAdmin: DataTypes.BOOLEAN,
-     defaultValue: false,
-    role: {
-      type: DataTypes.ENUM,
-        values: ['user', 'admin','superadmin'],
-         defaultValue: 'user'
+    
+    {
+      sequelize,
+      modelName: 'User',
     }
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
-}
+  );
+  return User;
+};

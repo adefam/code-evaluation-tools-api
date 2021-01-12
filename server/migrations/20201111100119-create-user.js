@@ -7,6 +7,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
+      userName: {
+        type: Sequelize.STRING
+      },
       firstName: {
         type: Sequelize.STRING
       },
@@ -18,6 +21,9 @@ module.exports = {
         unique: true
       },
       password: {
+        type: Sequelize.STRING
+      },
+      mobile: {
         type: Sequelize.STRING
       },
       isAdmin: {
