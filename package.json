@@ -24,6 +24,8 @@
   "homepage": "https://github.com/Data-Science-Nigeria/code-evaluation-tool-api#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "@sentry/node": "^5.29.2",
+    "@sentry/tracing": "^5.29.2",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
