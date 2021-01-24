@@ -73,6 +73,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
 
+      image: {
+        type: DataTypes.BLOB,
+      },
+
       mobile: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -116,9 +120,9 @@ module.exports = (sequelize, DataTypes) => {
   User.getByEmail = function (email) {
     return this.findOne({
       where: {
-        email: email
-      }
-    })
-  }
+        email: email,
+      },
+    });
+  };
   return User;
 };
