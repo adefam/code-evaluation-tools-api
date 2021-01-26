@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 
-'use strict';
+('use strict');
 
 const { Model, Sequelize } = require('sequelize');
 
@@ -70,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
             args: [10],
             msg: 'password must contain a minimum of 10 characters',
           },
-        }, 
+        },
       },
 
       mobile: {
@@ -83,11 +83,12 @@ module.exports = (sequelize, DataTypes) => {
           },
           len: {
             args: [9, 11],
-            msg: 'mobile must contain a minimun of 9 and maximum of 11 characters',
+            msg:
+              'mobile must contain a minimun of 9 and maximum of 11 characters',
           },
         },
       },
-    
+
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -97,15 +98,16 @@ module.exports = (sequelize, DataTypes) => {
         values: ['user', 'admin', 'superadmin'],
         defaultValue: 'user',
       },
-    }, {
+    },
+    {
       hooks: {
         afterValidate: async (user) => {
-          const salt = await bcrypt.genSalt(10);
-          user.password = await bcrypt.hash(user.password, salt);
-        }
-      }
+          const salt = await bcryptjs.genSalt(10);
+          user.password = await bcryptjs.hash(user.password, salt);
+        },
+      },
     },
-    
+
     {
       sequelize,
       modelName: 'User',

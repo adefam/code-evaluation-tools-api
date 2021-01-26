@@ -10,7 +10,7 @@
     "undo:all": "npx sequelize-cli db:migrate:undo:all",
     "seed": "npx sequelize-cli db:seed:all",
     "undo:seed": "npx sequelize-cli db:seed:undo:all",
-    "testMail": "node -e 'require(\"./util/emailHandler.js\")(\"test@mail.com\", \"Test Mail\", \"This is a test email from nodemailer.\", \"<h1>Test Mail</h1><p>This is a test mail from Nodemailer.<p>\")'"
+    "testMail": "node -e 'require(\"./server/util/emailHandler.js\")(\"test@mail.com\", \"Test Mail\", \"This is a test email from nodemailer.\", \"<h1>Test Mail</h1><p>This is a test mail from Nodemailer.<p>\")'"
   },
   "repository": {
     "type": "git",

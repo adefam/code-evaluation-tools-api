@@ -1,10 +1,9 @@
 const { validationResult } = require('express-validator');
 
-const db = require('../models');
+const { User } = require('../../models');
 const generateToken = require('../../util/generateToken');
 
 exports.register = async (req, res) => {
-
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).send({ status: 'fail', errors: errors.array() });
@@ -14,7 +13,7 @@ exports.register = async (req, res) => {
 
   try {
     //create new user
-    const user = await db.User.create({
+    const user = await User.create({
       userName,
       email,
       password,
