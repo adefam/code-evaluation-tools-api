@@ -5,9 +5,9 @@ module.exports = [
     .trim(' ')
     .toLowerCase()
     .notEmpty()
-    .withMessage('please input your email')
+    .withMessage('Please input your email')
     .isEmail()
-    .withMessage('please input correct email address format')
+    .withMessage('Please input correct email address format')
     .normalizeEmail({ all_lowercase: true }),
   body('password')
     .trim(' ')
