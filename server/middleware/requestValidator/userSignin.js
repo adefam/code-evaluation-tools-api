@@ -12,7 +12,7 @@ module.exports = [
   body('password')
     .trim(' ')
     .notEmpty()
-    .withMessage('Input a user password')
+    .withMessage('input a user password')
     .isLength({ min: 10 })
     .withMessage('password must be a minimum of 10 characters')
     .escape(),

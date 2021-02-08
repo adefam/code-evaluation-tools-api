@@ -113,5 +113,12 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
     }
   );
+  User.getByEmail = function (email) {
+    return this.findOne({
+      where: {
+        email: email
+      }
+    })
+  }
   return User;
 };

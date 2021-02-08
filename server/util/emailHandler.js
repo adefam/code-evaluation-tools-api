@@ -15,8 +15,8 @@ module.exports = async (mail, subject, text, html) => {
     host: process.env.MAIL_HOST,
     port: process.env.MAIL_PORT,
     auth: {
-      user: process.env.MAILTRAP_SMTP_USERNAME,
-      pass: process.env.MAILTRAP_SMTP_PASSWORD,
+      user: process.env.SMTP_USERNAME,
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 
@@ -28,11 +28,5 @@ module.exports = async (mail, subject, text, html) => {
     html,
   };
 
-  return transport.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log('Mail sent: %s', info.messageId);
-    transport.close();
-  });
+  return transport.sendMail(mailOptions);
 };
