@@ -102,6 +102,11 @@ module.exports = (sequelize, DataTypes) => {
         values: ['user', 'admin', 'superadmin'],
         defaultValue: 'user',
       },
+      status: {
+        type: DataTypes.ENUM,
+        values: ['active', 'deactivated'],
+        defaultValue: 'active',
+      },
     },
     {
       hooks: {
@@ -111,7 +116,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-
     {
       sequelize,
       modelName: 'User',
