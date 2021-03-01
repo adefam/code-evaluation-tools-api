@@ -128,5 +128,22 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
   };
+  User.getUsers = function (offset, limit) {
+    return this.findAndCountAll({
+      order: [['createdAt', 'DESC']],
+      attributes: [
+        'uuid',
+        'userName',
+        'firstName',
+        'lastName',
+        'email',
+        'mobile',
+        'role',
+        'status',
+      ],
+      offset,
+      limit,
+    });
+  };
   return User;
 };
