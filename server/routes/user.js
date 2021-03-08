@@ -12,6 +12,7 @@ const { verifySignUp } = require('../middleware/verifySignup');
 const { verifySignin } = require('../middleware/verifySignin');
 const { verifyUserUpdate } = require('../middleware/verifyUserUpdate');
 const { multerConfig } = require('../middleware/upload');
+const { verifyStatus } = require('../middleware/verifyStatus')
 
 
 const { signin } = require('../controllers/userControllers.js/signin');
@@ -21,14 +22,15 @@ const { changePassword } = require('../controllers/userControllers.js/changePass
 const { uploadFiles } = require('../controllers/userControllers.js/upload');
 
 router.post('/register', [userSignupValidator, verifySignUp, register]);
-router.post('/signin', [userSigninValidator, verifySignin, signin]);
+router.post('/signin', [userSigninValidator, verifySignin, verifyStatus, signin]);
 router.patch('/updateUser', [
   verifyUserToken,
+  verifyStatus,
   userUpdateValidator,
   verifyUserUpdate,
   updateUser,
 ]);
-router.patch('/changePassword', [verifyUserToken, userPassword, changePassword]);
-router.patch('/avatar', [verifyUserToken, multerConfig, uploadFiles]);
+router.patch('/changePassword', [verifyUserToken, userPassword, verifyStatus, changePassword]);
+router.patch('/avatar', [verifyUserToken, verifyStatus, multerConfig, uploadFiles]);
 
 module.exports = router;

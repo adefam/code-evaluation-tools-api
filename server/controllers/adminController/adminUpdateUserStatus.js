@@ -17,9 +17,7 @@ exports.adminUpdateUserStatus = async (req, res) => {
 
     // Update The User Record if user exist
     if (user) {
-      await user.update({
-        status,
-      });
+      await user.update({ status }, { hooks: false });
     }
 
     return res.status(200).json({
