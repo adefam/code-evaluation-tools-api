@@ -23,6 +23,6 @@ exports.uploadFiles = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ status: 'fail', message: 'Image upload failed' });
+    res.status(500).json({ status: 'fail', message: 'image upload failed' });
   }
 };

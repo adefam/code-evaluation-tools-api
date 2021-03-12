@@ -11,7 +11,7 @@ const imageFilter = (req, file, cb) => {
   const mimefile = filetypes.test(file.mimetype);
 
   if (!mimefile && !extname) {
-    return cb('Upload image of .jpeg, .jpg, .png only');
+    return cb('upload image of .jpeg, .jpg, .png only');
   }
   return cb(null, true);
 };
@@ -31,7 +31,7 @@ exports.multerConfig = (req, res, next) => {
     if (err) {
       //instanceof multer.MulterError
       if (err.code == 'LIMIT_FILE_SIZE') {
-        err = 'File Size is too large. Allowed file size is 500KB';
+        err = 'file size is too large. allowed file size is 500KB';
       }
       return res.status(500).send({
         status: 'fail',

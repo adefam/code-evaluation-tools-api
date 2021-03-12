@@ -1,5 +1,3 @@
-const { User } = require('../../models');
-
 // Authorization
 exports.adminAuthorization = async (req, res, next) => {
   try {
@@ -16,7 +14,7 @@ exports.adminAuthorization = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       status: 'fail',
-      message: "An error occurred trying to process your request",
+      message: 'An error occurred trying to process your request',
     });
   }
 };

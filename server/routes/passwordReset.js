@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { forgotPassword, resetPassword } = require('../controllers/userControllers.js/passwordReset');
+const { forgotPassword, resetPassword } = require('../controllers/userController/passwordReset');
 const { emailValidator, passwordValidator, urlValidator } = require('../middleware/requestValidator/passwordReset');
 
 router
