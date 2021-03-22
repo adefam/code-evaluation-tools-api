@@ -13,6 +13,8 @@ const { getAllUsers } = require('../controllers/adminController/getAllUsers');
 const {
   queryValidator = getAllUsers,
 } = require('../middleware/requestValidator/getAllUsers');
+const { verifyStatus } = require('../middleware/verifyStatus')
+const { getOneUser } = require('../controllers/adminController/getOneUser');
 
 router
   .patch('/users/:id', [
@@ -21,10 +23,14 @@ router
     userStatus,
     adminUpdateUserStatus,
   ])
+
   .get(
     '/users',
     [verifyUserToken, adminAuthorization, queryValidator],
     getAllUsers
-  );
+  )
+
+  .get('/users/:id', [verifyUserToken, adminAuthorization, verifyStatus, getOneUser]);
+
 
 module.exports = router;
