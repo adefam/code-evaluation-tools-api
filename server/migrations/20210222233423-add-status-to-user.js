@@ -8,7 +8,16 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn('Users', 'status');
+  down: async(queryInterface) => {
+    queryInterface.sequelize.transaction(async(t) => {
+      await Promise.all([
+        await queryInterface.removeColumn('Users', 'status'),
+        await queryInterface.sequelize.query('DROP TYPE "enum_Users_status"', { 
+          transaction: t,
+        }),
+      ]);
+    });
   },
+    
 };
+
