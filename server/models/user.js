@@ -121,6 +121,9 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
     }
   );
+  User.associate = (models) => {
+    User.hasMany(models.Exercise, { foreignKey: 'adminId', as: 'exercises' });
+  };
   User.getByEmail = function (email) {
     return this.findOne({
       where: {
