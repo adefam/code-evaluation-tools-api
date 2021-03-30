@@ -7,6 +7,7 @@ const avatar = require('./server/routes/avatar')
 const userRoute = require('./server/routes/user');
 const passwordReset = require('./server/routes/passwordReset');
 const adminRoute = require('./server/routes/admin');
+const exerciseRoute = require('./server/routes/exercise');
 const color = require('./server/util/color');
 const Sentry = require('./server/middleware/sentry');
 
@@ -28,8 +29,8 @@ if (process.env.NODE_ENV === 'development') {
 // Routes
 app.use('/api/v1/auth', [userRoute, passwordReset]);
 app.use('/api/v1/admin', adminRoute);
-
 app.use('/api/v1/users', avatar);
+app.use('/api/v1/exercises', exerciseRoute);
 
 app.use('/', (req, res) => {
   res.send('Welcome to code evaluation api');

@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Exercise.associate = (models) => {
-    Exercise.belongsTo(models.User, { as: 'user' });
+    Exercise.belongsTo(models.User, { foreignKey: 'adminId', as: 'user' });
   };
   return Exercise;
 };

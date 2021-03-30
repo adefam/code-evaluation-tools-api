@@ -28,6 +28,7 @@ module.exports = {
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       role: {
         type: Sequelize.ENUM('user', 'admin', 'superadmin'),
