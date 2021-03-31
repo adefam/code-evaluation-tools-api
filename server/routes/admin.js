@@ -33,6 +33,7 @@ router
     [verifyUserToken, adminAuthorization, verifyStatus, queryValidator],
     getAllUsers
   )
+
   .get('/users/:id', [
     verifyUserToken,
     adminAuthorization,

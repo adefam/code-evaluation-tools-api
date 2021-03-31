@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const createExercise = require('../middleware/requestValidator/createExercise');
+const exerciseInputValidation = require('../middleware/requestValidator/exerciseInputValidation');
+const exerciseUpdate = require('../middleware/requestValidator/exerciseUpdate');
 
 const {
   adminAuthorization,
@@ -13,13 +14,24 @@ const { verifyStatus } = require('../middleware/verifyStatus');
 const {
   adminCreateExercise,
 } = require('../controllers/exerciseController/admin/adminCreateExercise');
+const {
+  adminUpdateExercise,
+} = require('../controllers/exerciseController/admin/adminUpdateExercise');
 
-router.post('', [
-  verifyUserToken,
-  adminAuthorization,
-  verifyStatus,
-  createExercise,
-  adminCreateExercise,
-]);
+router
+  .post('', [
+    verifyUserToken,
+    adminAuthorization,
+    verifyStatus,
+    exerciseInputValidation,
+    adminCreateExercise,
+  ])
+  .patch('/:id', [
+    verifyUserToken,
+    adminAuthorization,
+    verifyStatus,
+    exerciseUpdate,
+    adminUpdateExercise,
+  ]);
 
 module.exports = router;
