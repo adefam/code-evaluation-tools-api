@@ -14,9 +14,7 @@ const {
 const { verifyUserToken } = require('../middleware/verifyToken');
 const { getAllUsers } = require('../controllers/adminController/getAllUsers');
 
-const {
-  queryValidator = getAllUsers,
-} = require('../middleware/requestValidator/getAllUsers');
+const { pagination } = require('../middleware/requestValidator/pagination');
 
 const { verifyStatus } = require('../middleware/verifyStatus');
 const { getOneUser } = require('../controllers/adminController/getOneUser');
@@ -30,7 +28,7 @@ router
   ])
   .get(
     '/users',
-    [verifyUserToken, adminAuthorization, verifyStatus, queryValidator],
+    [verifyUserToken, adminAuthorization, verifyStatus, pagination],
     getAllUsers
   )
 

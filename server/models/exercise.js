@@ -69,5 +69,13 @@ module.exports = (sequelize, DataTypes) => {
   Exercise.associate = (models) => {
     Exercise.belongsTo(models.User, { foreignKey: 'adminId', as: 'user' });
   };
+  Exercise.getExercises = function (offset, limit) {
+    return this.findAndCountAll({
+      order: [['createdAt', 'DESC']],
+      attributes: [['uuid', 'id'] , 'title'],
+      offset,
+      limit,
+    });
+  };
   return Exercise;
 };

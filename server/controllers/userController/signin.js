@@ -1,7 +1,7 @@
 const generateToken = require('../../util/generateToken');
 
 exports.signin = (req, res) => {
-  const { uuid, email, userName } = req.user;
+  const { uuid, email, role, status } = req.user;
   const token = generateToken(uuid, email);
 
   return res.status(200).json({
@@ -9,8 +9,8 @@ exports.signin = (req, res) => {
     message: 'User successfully signed in',
     data: {
       id: uuid,
-      email,
-      userName,
+      role,
+      status,
       token,
     },
   });

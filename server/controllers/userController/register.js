@@ -30,8 +30,8 @@ exports.register = async (req, res) => {
       message: 'User successfully signed up',
       data: {
         id: user.uuid,
-        email: user.email,
-        userName: user.userName,
+        role: user.role,
+        status: user.status,
         token,
       },
     });

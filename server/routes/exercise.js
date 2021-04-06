@@ -3,6 +3,7 @@ const router = express.Router();
 
 const exerciseInputValidation = require('../middleware/requestValidator/exerciseInputValidation');
 const exerciseUpdate = require('../middleware/requestValidator/exerciseUpdate');
+const { pagination } = require('../middleware/requestValidator/pagination');
 
 const {
   adminAuthorization,
@@ -17,6 +18,9 @@ const {
 const {
   adminUpdateExercise,
 } = require('../controllers/exerciseController/admin/adminUpdateExercise');
+const {
+  getAllExercises,
+} = require('../controllers/exerciseController/getAllExercises');
 
 router
   .post('', [
@@ -32,6 +36,7 @@ router
     verifyStatus,
     exerciseUpdate,
     adminUpdateExercise,
-  ]);
+  ])
+  .get('/', [verifyUserToken, verifyStatus, pagination], getAllExercises);
 
 module.exports = router;

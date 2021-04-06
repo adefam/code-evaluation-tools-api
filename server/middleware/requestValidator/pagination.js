@@ -1,6 +1,6 @@
 const { query } = require('express-validator');
 
-exports.getAllUsers = [
+exports.pagination = [
   query('page')
     .isNumeric()
     .optional({ checkFalsy: true })

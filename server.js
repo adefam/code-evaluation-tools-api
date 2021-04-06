@@ -10,6 +10,7 @@ const adminRoute = require('./server/routes/admin');
 const exerciseRoute = require('./server/routes/exercise');
 const color = require('./server/util/color');
 const Sentry = require('./server/middleware/sentry');
+const cors = require('cors')
 
 
 const app = express();
@@ -36,6 +37,7 @@ app.use('/', (req, res) => {
   res.send('Welcome to code evaluation api');
 });
 
+app.use(cors)
 app.use(Sentry.Handlers.errorHandler());
 
 const PORT = process.env.PORT || 3000;
