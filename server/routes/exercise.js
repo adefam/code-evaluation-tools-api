@@ -22,6 +22,8 @@ const {
   getAllExercises,
 } = require('../controllers/exerciseController/getAllExercises');
 
+const { getOneExercise } = require('../controllers/exerciseController/user/getOneExercise')
+
 router
   .post('', [
     verifyUserToken,
@@ -37,6 +39,16 @@ router
     exerciseUpdate,
     adminUpdateExercise,
   ])
-  .get('/', [verifyUserToken, verifyStatus, pagination], getAllExercises);
+  .get('/', [
+    verifyUserToken,
+    verifyStatus,
+    pagination],
+    getAllExercises
+  )
+  .get('/:id', [
+    verifyUserToken,
+    verifyStatus,
+    getOneExercise,
+  ])
 
 module.exports = router;
