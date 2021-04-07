@@ -21,8 +21,13 @@ const {
 const {
   getAllExercises,
 } = require('../controllers/exerciseController/getAllExercises');
+const {
+  adminDeleteExercise,
+} = require('../controllers/exerciseController/admin/adminDeleteExercise');
 
-const { getOneExercise } = require('../controllers/exerciseController/user/getOneExercise')
+const {
+  getOneExercise,
+} = require('../controllers/exerciseController/user/getOneExercise');
 
 router
   .post('', [
@@ -39,16 +44,13 @@ router
     exerciseUpdate,
     adminUpdateExercise,
   ])
-  .get('/', [
+  .get('/', [verifyUserToken, verifyStatus, pagination], getAllExercises)
+  .get('/:id', [verifyUserToken, verifyStatus, getOneExercise])
+  .delete('/:id', [
     verifyUserToken,
+    adminAuthorization,
     verifyStatus,
-    pagination],
-    getAllExercises
-  )
-  .get('/:id', [
-    verifyUserToken,
-    verifyStatus,
-    getOneExercise,
-  ])
+    adminDeleteExercise,
+  ]);
 
 module.exports = router;
