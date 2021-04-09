@@ -72,7 +72,15 @@ module.exports = (sequelize, DataTypes) => {
   Exercise.getExercises = function (offset, limit) {
     return this.findAndCountAll({
       order: [['createdAt', 'DESC']],
-      attributes: [['uuid', 'id'] , 'title'],
+      attributes: [
+        ['uuid', 'id'],
+        'title',
+        'body',
+        'hint',
+        'testCode',
+        'testCodeSolution',
+        'exerciseStatus',
+      ],
       offset,
       limit,
     });
