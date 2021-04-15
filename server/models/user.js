@@ -123,6 +123,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = (models) => {
     User.hasMany(models.Exercise, { foreignKey: 'adminId', as: 'exercises' });
+    User.hasMany(models.Score, { foreignKey: 'userId', as: 'scores' });
   };
   User.getByEmail = function (email) {
     return this.findOne({

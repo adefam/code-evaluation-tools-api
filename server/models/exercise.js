@@ -68,6 +68,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Exercise.associate = (models) => {
     Exercise.belongsTo(models.User, { foreignKey: 'adminId', as: 'user' });
+    Exercise.hasMany(models.Score, { foreignKey: 'exerciseId', as: 'scores' });
   };
   Exercise.getExercises = function (offset, limit) {
     return this.findAndCountAll({
