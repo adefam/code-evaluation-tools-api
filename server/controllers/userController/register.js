@@ -1,7 +1,9 @@
 const { validationResult } = require('express-validator');
 
 const { User } = require('../../models');
+const { errorResponse } = require('../../util/errorResponse');
 const generateToken = require('../../util/generateToken');
+const { successResponse } = require('../../util/successResponse');
 
 exports.register = async (req, res) => {
   const errors = validationResult(req);
@@ -25,17 +27,13 @@ exports.register = async (req, res) => {
     const token = generateToken(user.uuid, user.email);
 
     //response status
-    res.status(201).json({
-      status: 'success',
-      message: 'User successfully signed up',
-      data: {
-        id: user.uuid,
-        role: user.role,
-        status: user.status,
-        token,
-      },
+    successResponse(res, 201, 'User successfully signed up', {
+      id: user.uuid,
+      role: user.role,
+      status: user.status,
+      token,
     });
   } catch (error) {
-    res.status(500).send({ message: 'Internal Server Error' });
+    errorResponse(req, res);
   }
 };

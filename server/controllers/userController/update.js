@@ -1,5 +1,7 @@
 const { validationResult } = require('express-validator');
 const { User } = require('../../models');
+const { errorResponse } = require('../../util/errorResponse');
+const { successResponse } = require('../../util/successResponse');
 
 // Update a user
 exports.updateUser = async (req, res) => {
@@ -25,21 +27,14 @@ exports.updateUser = async (req, res) => {
       });
     }
 
-    res.status(200).send({
-      status: 'success',
-      message: 'profile successfully updated',
-      data: {
-        userName: user.userName,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        mobile: user.mobile,
-        email: user.email,
-      },
+    successResponse(res, 200, 'profile successfully updated', {
+      userName: user.userName,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      mobile: user.mobile,
+      email: user.email,
     });
   } catch (error) {
-    res.status(500).send({
-      status: 'fail',
-      message: 'error in updating profile: ',
-    });
+    errorResponse(req, res, 500, 'error in updating profile');
   }
 };

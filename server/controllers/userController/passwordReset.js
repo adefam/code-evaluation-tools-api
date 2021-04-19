@@ -7,14 +7,14 @@ const {
   forgotPasswordHTML,
   passwordResetHTML,
 } = require('../../util/constants');
+const { errorResponse } = require('../../util/errorResponse');
+const { successResponse } = require('../../util/successResponse');
 
 // Fetch user from database
 const fetchUserFromDB = async (req, res, email) => {
   const user = await User.getByEmail(email);
   if (!user) {
-    return res
-      .status(404)
-      .json({ status: 'fail', message: 'user does not exist' });
+    return errorResponse(req, res, 404, 'user does not exist');
   }
   return {
     uid: user.uuid,
@@ -59,15 +59,9 @@ exports.forgotPassword = async (req, res) => {
 
   try {
     await emailHandler(email, subject, text, html);
-    res.json({
-      status: 'success',
-      message: 'mail sent successfully',
-    });
+    successResponse(res, 200, 'mail sent successfully');
   } catch (err) {
-    res.status(500).json({
-      stats: 'fail',
-      message: 'email could not be sent',
-    });
+    errorResponse(req, res, 500, 'email could not be sent');
   }
 };
 
@@ -100,11 +94,8 @@ exports.resetPassword = async (req, res) => {
     const html = passwordResetHTML(user);
 
     await emailHandler(email, subject, text, html);
-    res.status(200).json({
-      status: 'success',
-      message: 'password reset successful',
-    });
+    successResponse(res, 200, 'password reset successful');
   } catch (err) {
-    res.status(400).json({ status: 'fail', message: 'invalid reset url' });
+    errorResponse(req, res, 400, 'invalid reset url');
   }
 };

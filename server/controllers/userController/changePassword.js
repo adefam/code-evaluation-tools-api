@@ -1,6 +1,8 @@
 const { User } = require('../../models');
 const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
+const { errorResponse } = require('../../util/errorResponse');
+const { successResponse } = require('../../util/successResponse');
 
 exports.changePassword = async (req, res) => {
   const errors = validationResult(req);
@@ -13,23 +15,14 @@ exports.changePassword = async (req, res) => {
 
     // check if current password is correct
     if (!(await bcryptjs.compare(req.body.oldPassword, user.password))) {
-      return res.status(400).json({
-        success: 'fail',
-        message: 'password incorrect',
-      });
+      return errorResponse(req, res, 400, 'password incorrect');
     }
 
     //if password is correct, allow change password
     user.password = req.body.newPassword;
     await user.save();
-    return res.status(200).json({
-      status: 'success',
-      message: 'password changed successfully',
-    });
+    successResponse(res, 200, 'password changed successfully');
   } catch (error) {
-    return res.status(500).json({
-      status: 'fail',
-      message: 'An error occurred trying to process your request',
-    });
+    errorResponse(req, res);
   }
 };

@@ -1,12 +1,12 @@
+const { errorResponse } = require('../../util/errorResponse');
+const { successResponse } = require('../../util/successResponse');
+
 exports.uploadFiles = async (req, res) => {
   try {
     // Request upload file
 
     if (req.file === undefined) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'please select a file.',
-      });
+      return errorResponse(req, res, 400, 'please select a file');
     }
 
     const user = await req.user.update({
@@ -14,15 +14,11 @@ exports.uploadFiles = async (req, res) => {
     });
 
     //response status
-    res.status(200).send({
-      status: 'success',
-      message: 'profile picture saved successfully ',
-      data: {
-        id: user.uuid,
-        image: Buffer.from(user.image).toString('base64'),
-      },
+    successResponse(res, 200, 'profile picture saved successfully', {
+      id: user.uuid,
+      image: Buffer.from(user.image).toString('base64'),
     });
   } catch (err) {
-    res.status(500).json({ status: 'fail', message: 'image upload failed' });
+    errorResponse(req, res, 500, 'image upload failed');
   }
 };
