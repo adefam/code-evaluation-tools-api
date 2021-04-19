@@ -1,12 +1,12 @@
+const { errorResponse } = require('../util/errorResponse');
+
 exports.verifyStatus = (req, res, next) => {
   const { status } = req.user;
 
   if (status !== 'active') {
-    return res.status(401).json({
-      status: 'fail',
-      message: 'user deactivated',
-    });
+    errorResponse(req, res, 401, "user deactivated");
   }
 
   next();
+  
 };

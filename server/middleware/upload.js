@@ -1,5 +1,6 @@
 const multer = require('multer');
 const path = require('path');
+const { errorResponse } = require('../util/errorResponse');
 
 //----Filter Image---
 const imageFilter = (req, file, cb) => {
@@ -33,10 +34,7 @@ exports.multerConfig = (req, res, next) => {
       if (err.code == 'LIMIT_FILE_SIZE') {
         err = 'file size is too large. allowed file size is 500KB';
       }
-      return res.status(500).send({
-        status: 'fail',
-        message: err,
-      });
+      errorResponse(req, res, 500, err)
     }
     next();
   });

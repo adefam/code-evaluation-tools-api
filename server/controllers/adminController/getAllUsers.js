@@ -1,6 +1,8 @@
 const { validationResult } = require('express-validator');
 const { User } = require('../../models');
 const { pagination } = require('../../util/pagination');
+const { errorResponse } = require('../../util/errorResponse')
+const { successResponse } = require('../../util/successResponse')
 
 /**
  * Get all users controller
@@ -25,21 +27,13 @@ exports.getAllUsers = async (req, res) => {
       offset = (totalPage - 1) * limit;
       data = await User.getUsers(offset, limit);
     }
-
-    res.status(200).json({
-      status: 'success',
-      message: 'users successfully fetched',
-      data: {
-        totalUsers: data.count,
-        users: data.rows,
-        totalPage: totalPage,
-        currentPage: page,
-      },
+    successResponse(res, 200, 'users successsfully fetched', {
+      totalUsers: data.count,
+      users: data.rows,
+      totalPage: totalPage,
+      currentPage: page,
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'fail',
-      message: 'internal server error',
-    });
+    errorResponse(req, res)
   }
 };

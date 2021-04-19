@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { errorResponse} = require('../util/errorResponse')
 
 exports.verifySignUp = async (req, res, next) => {
   try {
@@ -10,10 +11,7 @@ exports.verifySignUp = async (req, res, next) => {
     });
 
     if (user) {
-      return res.status(400).send({
-        status: 'fail',
-        message: 'username already exists',
-      });
+      errorResponse(req, res, 400, "username already exists");
     }
 
     // Email
@@ -22,18 +20,14 @@ exports.verifySignUp = async (req, res, next) => {
         email: req.body.email,
       },
     });
+
     if (userEmail) {
-      return res.status(400).send({
-        status: 'fail',
-        message: 'email already exists',
-      });
+      errorResponse(req, res, 400, "email already exists");
     }
 
     next();
+    
   } catch (error) {
-    return res.status(500).json({
-      status: 'error',
-      message: 'An error occurred trying to process your request',
-    });
+    errorResponse(req, res);
   }
 };

@@ -1,15 +1,13 @@
 const { Op } = require('sequelize');
 const { User } = require('../models');
+const { errorResponse } = require('../util/errorResponse')
 
 exports.verifyUserUpdate = async (req, res, next) => {
   try {
     const { uuid } = req.user;
 
     if (Object.keys(req.body).length === 0) {
-      return res.status(400).send({
-        status: 'fail',
-        message: 'fields cannot be empty',
-      });
+      errorResponse(req, res, 400, "fields cannot be empty");
     }
 
     const { userName, email } = req.body;
@@ -25,17 +23,11 @@ exports.verifyUserUpdate = async (req, res, next) => {
     });
 
     if (userExists && uuid != userExists.uuid) {
-      return res.status(400).send({
-        status: 'fail',
-        message: 'User credential already exists',
-      });
+      errorResponse(req, res, 400, "user credential already exists");
     }
 
     next();
   } catch (error) {
-    return res.status(500).json({
-      status: 'fail',
-      message: 'an error occurred trying to process your request',
-    });
+    errorResponse(req, res);
   }
 };
