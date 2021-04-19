@@ -1,4 +1,7 @@
 const { Exercise } = require('../../../models');
+const { errorResponse } = require('../../../util/errorResponse')
+const { successResponse } = require('../../../util/successResponse')
+
 
 exports.adminDeleteExercise = async (req, res) => {
   try {
@@ -7,22 +10,13 @@ exports.adminDeleteExercise = async (req, res) => {
     const exercise = await Exercise.findByPk(uuid);
 
     if (!exercise) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'exercise does not exist',
-      });
+      return errorResponse(req, res, 404, 'exercise does not exist');
     }
 
     const deleteExercise = await exercise.destroy();
 
-    return res.status(200).json({
-      status: 'success',
-      message: 'exercise successfully deleted',
-    });
+    successResponse(res, 200, 'exercise successfully deleted');
   } catch (error) {
-    return res.status(500).json({
-      status: 'fail',
-      message: 'an error occurred trying to process your request',
-    });
+    errorResponse(req, res);
   }
 };

@@ -1,5 +1,8 @@
 const { validationResult } = require('express-validator');
 const { Exercise } = require('../../../models');
+const { errorResponse } = require('../../../util/errorResponse')
+const { successResponse } = require('../../../util/successResponse')
+
 
 exports.adminUpdateExercise = async (req, res) => {
   const errors = validationResult(req);
@@ -21,23 +24,13 @@ exports.adminUpdateExercise = async (req, res) => {
     const exercise = await Exercise.findByPk(uuid);
 
     if (!exercise) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'exercise does not exist',
-      });
+      return errorResponse(req, res, 404, 'exercise does not exist');
     }
 
     const updateExercise = await exercise.update(body);
 
-    return res.status(200).json({
-      status: 'success',
-      message: 'exercise updated successfully',
-      data: updateExercise,
-    });
+    successResponse(res, 200, 'exercise  updated successfully');
   } catch (error) {
-    return res.status(500).json({
-      status: 'fail',
-      message: 'an error occurred trying to process your request',
-    });
+    errorResponse(req, res);
   }
 };

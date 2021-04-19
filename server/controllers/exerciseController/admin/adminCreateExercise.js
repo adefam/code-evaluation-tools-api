@@ -1,5 +1,8 @@
 const { validationResult } = require('express-validator');
 const { Exercise } = require('../../../models');
+const { errorResponse } = require('../../../util/errorResponse')
+const { successResponse } = require('../../../util/successResponse')
+
 
 exports.adminCreateExercise = async (req, res) => {
   const errors = validationResult(req);
@@ -30,15 +33,12 @@ exports.adminCreateExercise = async (req, res) => {
     });
 
     //response status
-    res.status(201).json({
-      status: 'success',
-      message: 'exercise successfully created',
-      data: {
-        id: exercise.uuid,
-        title: exercise.title,
-      },
-    });
+    successResponse(res, 201, 'exercise successfully created', {
+      id: exercise.uuid,
+      title: exercise.title,
+    })
+    
   } catch (error) {
-    res.status(500).send({ message: 'internal Server Error' });
+    errorResponse(req, res);
   }
 };
