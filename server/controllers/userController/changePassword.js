@@ -4,6 +4,13 @@ const { validationResult } = require('express-validator');
 const { errorResponse } = require('../../util/errorResponse');
 const { successResponse } = require('../../util/successResponse');
 
+/**
+ * @description Change password controller
+ * @param {Request} req http request
+ * @param {Response} res http response
+ * @returns a response that return a successful password change.
+ */
+
 exports.changePassword = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

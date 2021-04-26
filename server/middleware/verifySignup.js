@@ -3,18 +3,19 @@ const { errorResponse} = require('../util/errorResponse')
 
 exports.verifySignUp = async (req, res, next) => {
   try {
-    //username
+    //Find data in database
     const user = await User.findOne({
       where: {
         userName: req.body.userName,
       },
     });
 
+    //Display message if users already exist
     if (user) {
       errorResponse(req, res, 400, "username already exists");
     }
 
-    // Email
+    // Display message if email already exist
     const userEmail = await User.findOne({
       where: {
         email: req.body.email,

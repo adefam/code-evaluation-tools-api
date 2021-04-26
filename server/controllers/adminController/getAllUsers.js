@@ -5,7 +5,7 @@ const { errorResponse } = require('../../util/errorResponse')
 const { successResponse } = require('../../util/successResponse')
 
 /**
- * Get all users controller
+ * @description Get all users controller
  * @param {Request} req http request
  * @param {Response} res http response
  * @returns a response to the user including a paginated list of all users.

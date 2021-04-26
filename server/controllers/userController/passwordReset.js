@@ -10,9 +10,19 @@ const {
 const { errorResponse } = require('../../util/errorResponse');
 const { successResponse } = require('../../util/successResponse');
 
+
+/**
+ * @description Reset password controller
+ * @param {Request} req http request
+ * @param {Response} res http response
+ * @returns a response that return a successful password reset.
+ */
+
 // Fetch user from database
 const fetchUserFromDB = async (req, res, email) => {
   const user = await User.getByEmail(email);
+
+//check if user exist
   if (!user) {
     return errorResponse(req, res, 404, 'user does not exist');
   }

@@ -3,6 +3,12 @@ const { Exercise } = require('../../../models');
 const { errorResponse } = require('../../../util/errorResponse')
 const { successResponse } = require('../../../util/successResponse')
 
+/**
+ * @description Update exercise controller
+ * @param {Request} req http request
+ * @param {Response} res http response
+ * @returns a response that return updated exercise.
+ */
 
 exports.adminUpdateExercise = async (req, res) => {
   const errors = validationResult(req);
@@ -23,10 +29,12 @@ exports.adminUpdateExercise = async (req, res) => {
   try {
     const exercise = await Exercise.findByPk(uuid);
 
+    // check if exercise exist
     if (!exercise) {
       return errorResponse(req, res, 404, 'exercise does not exist');
     }
 
+    //update exercise
     const updateExercise = await exercise.update(body);
 
     successResponse(res, 200, 'exercise  updated successfully');

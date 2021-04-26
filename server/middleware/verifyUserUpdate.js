@@ -5,7 +5,7 @@ const { errorResponse } = require('../util/errorResponse')
 exports.verifyUserUpdate = async (req, res, next) => {
   try {
     const { uuid } = req.user;
-
+    //pass message for an empty field
     if (Object.keys(req.body).length === 0) {
       errorResponse(req, res, 400, "fields cannot be empty");
     }

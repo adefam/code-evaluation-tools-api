@@ -3,6 +3,14 @@ const { User } = require('../../models');
 const { errorResponse } = require('../../util/errorResponse');
 const { successResponse } = require('../../util/successResponse');
 
+
+/**
+ * @description Update user controller
+ * @param {Request} req http request
+ * @param {Response} res http response
+ * @returns a response to the user that return a updated data.
+ */
+
 // Update a user
 exports.updateUser = async (req, res) => {
   const errors = validationResult(req);

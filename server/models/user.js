@@ -151,3 +151,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   return User;
 };
+
+
+/*user Admin, user controller*/

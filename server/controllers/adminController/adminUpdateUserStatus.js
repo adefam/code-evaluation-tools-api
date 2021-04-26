@@ -4,7 +4,7 @@ const { errorResponse } = require('../../util/errorResponse')
 const { successResponse } = require('../../util/successResponse')
 
 /**
- * Update users status controller
+ * @description Update users status controller
  * @param {Request} req http request
  * @param {Response} res http response
  * @returns a response that return user status update.
@@ -22,6 +22,7 @@ exports.adminUpdateUserStatus = async (req, res) => {
 
     const { status } = req.body;
 
+    // find users by id
     const user = await User.findByPk(uuid);
 
     // Update The User Record if user exist

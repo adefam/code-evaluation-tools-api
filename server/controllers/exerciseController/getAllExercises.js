@@ -3,7 +3,7 @@ const { Exercise } = require('../../models');
 const { pagination } = require('../../util/pagination');
 
 /**
- * Get all exercises controller
+ * @description Get all exercises controller
  * @param {Request} req http request
  * @param {Response} res http response
  * @returns a response to the user including a paginated list of all exercises.
@@ -26,6 +26,7 @@ exports.getAllExercises = async (req, res) => {
       data = await Exercise.getExercises(offset, limit);
     }
 
+    //response status
     res.status(200).json({
       status: 'success',
       message: 'exercises fetched successfully',

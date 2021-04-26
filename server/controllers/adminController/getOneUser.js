@@ -3,7 +3,7 @@ const { errorResponse } = require('../../util/errorResponse')
 const { successResponse } = require('../../util/successResponse')
 
 /**
- * Get one users controller
+ * @description Get one users controller
  * @param {Request} req http request
  * @param {Response} res http response
  * @returns a response to return a signle user.

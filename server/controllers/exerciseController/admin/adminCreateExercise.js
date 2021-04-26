@@ -3,6 +3,12 @@ const { Exercise } = require('../../../models');
 const { errorResponse } = require('../../../util/errorResponse')
 const { successResponse } = require('../../../util/successResponse')
 
+/**
+ * @description Create exercise controller
+ * @param {Request} req http request
+ * @param {Response} res http response
+ * @returns a response that return exercise id and title.
+ */
 
 exports.adminCreateExercise = async (req, res) => {
   const errors = validationResult(req);

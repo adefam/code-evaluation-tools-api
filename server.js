@@ -33,6 +33,7 @@ app.use('/api/v1/admin', adminRoute);
 app.use('/api/v1/users', avatar);
 app.use('/api/v1/exercises', exerciseRoute);
 
+//landing display
 app.use('/', (req, res) => {
   res.send('Welcome to code evaluation api');
 });
@@ -40,5 +41,6 @@ app.use('/', (req, res) => {
 app.use(cors)
 app.use(Sentry.Handlers.errorHandler());
 
+//PORT number
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`server is running at port ${PORT}`.success));

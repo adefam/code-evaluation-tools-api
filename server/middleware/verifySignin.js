@@ -14,8 +14,8 @@ exports.verifySignin = async (req, res, next) => {
         email: req.body.email,
       },
     });
+    
     //if no user exist show an error: invaild email or password
-
     if (!user) {
       errorResponse(req, res, 400, "invalid email or password");
     }

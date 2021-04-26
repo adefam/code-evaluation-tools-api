@@ -5,6 +5,14 @@ const { errorResponse } = require('../../util/errorResponse');
 const generateToken = require('../../util/generateToken');
 const { successResponse } = require('../../util/successResponse');
 
+
+/**
+ * @description Register user controller
+ * @param {Request} req http request
+ * @param {Response} res http response
+ * @returns a response to the user that return user id, role, status and token.
+ */
+
 exports.register = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
