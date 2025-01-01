@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Data-Science-Nigeria/code-evaluation-tool-api#readme",
   "dependencies": {
-    "@sentry/node": "^5.29.2",
+    "@sentry/node": "^8.47.0",
     "@sentry/tracing": "^5.29.2",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
@@ -30,7 +30,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.17",
     "path": "^0.12.7",
