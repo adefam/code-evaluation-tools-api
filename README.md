@@ -36,12 +36,3 @@ To use the API, send a POST request to the `/evaluate` endpoint with the followi
 
 - `language`: The programming language of the code snippet.
 - `code`: The code snippet to be evaluated.
-
-Example:
-```sh
-curl -X POST https://your-api-url/evaluate \
-    -H "Content-Type: application/json" \
-    -d '{
-        "language": "python",
-        "code": "print(\"Hello, World!\")"
-    }'
